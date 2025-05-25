@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
@@ -25,10 +26,17 @@ const font = Poppins({
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en" className="hydrated antialiased">
+    <html lang="en" suppressHydrationWarning className="antialiased">
       <body className={cn(font.className)}>
-        {children}
-        <Toaster theme="light" richColors />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster theme="light" richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
